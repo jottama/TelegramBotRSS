@@ -18,15 +18,15 @@ import (
 
 var (
 	feedSettingTmpl = `
-订阅<b>设置</b>
+Suscripcion<b>Configurar</b>
 [id] {{ .sub.ID }}
-[标题] {{ .source.Title }}
+[Titulo] {{ .source.Title }}
 [Link] {{.source.Link }}
-[抓取更新] {{if ge .source.ErrorCount .Count }}暂停{{else if lt .source.ErrorCount .Count }}抓取中{{end}}
-[抓取频率] {{ .sub.Interval }}分钟
-[通知] {{if eq .sub.EnableNotification 0}}关闭{{else if eq .sub.EnableNotification 1}}开启{{end}}
-[Telegraph] {{if eq .sub.EnableTelegraph 0}}关闭{{else if eq .sub.EnableTelegraph 1}}开启{{end}}
-[Tag] {{if .sub.Tag}}{{ .sub.Tag }}{{else}}无{{end}}
+[Obtener actualizaciones] {{if ge .source.ErrorCount .Count }}se acab0 el tiempo{{else if lt .source.ErrorCount .Count }}Cerrar{{end}}
+[Frecuencia de rastreo] {{ .sub.Interval }}minuto
+[!] {{if eq .sub.EnableNotification 0}}Cerrar{{else if eq .sub.EnableNotification 1}}Enceneder{{end}}
+[Telegraph] {{if eq .sub.EnableTelegraph 0}}Cerrar{{else if eq .sub.EnableTelegraph 1}}Enceneder{{end}}
+[Tag] {{if .sub.Tag}}{{ .sub.Tag }}{{else}}No{{end}}
 `
 )
 
@@ -40,7 +40,6 @@ func toggleCtrlButtons(c *tb.Callback, action string) {
 
 	data := strings.Split(c.Data, ":")
 	subscriberID, _ := strconv.Atoi(data[0])
-	// 如果订阅者与按钮点击者id不一致，需要验证管理员权限
 	if subscriberID != c.Sender.ID {
 		channelChat, err := B.ChatByID(fmt.Sprintf("%d", subscriberID))
 
